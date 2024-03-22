@@ -1,10 +1,10 @@
 from rest_framework.views import APIView
 from .models import Application
 from .serializers import ApplicationSerializer, ApplicationPatchSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied, NotFound
-from rest_framework import generics
+from rest_framework.generics import CreateAPIView
 
 # from rest_framework import authentication, permissions
 from rest_framework import status
@@ -12,7 +12,7 @@ from rest_framework import status
 
 class ApplicationListCreate(APIView):
     # authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = (IsAuthenticated,)
     serializer_class = ApplicationSerializer
 
     def get(self, request, format=None):
@@ -21,7 +21,9 @@ class ApplicationListCreate(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = ApplicationSerializer(data=request.data, context={'request': request})
+        serializer = ApplicationSerializer(
+            data=request.data, context={"request": request}
+        )
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(
@@ -34,7 +36,8 @@ class ApplicationListCreate(APIView):
 
 
 class ApplicationGetDelete(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
+    permission_classes = (IsAdminUser,)
     serializer_class = ApplicationSerializer
 
     def get_object(self, request, pk):

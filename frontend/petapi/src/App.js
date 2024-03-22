@@ -27,13 +27,13 @@ function App() {
 
   return (
     <div className="App">
-      <div className="adoption-button">
+      {/* <div className="adoption-button">
         {loggedIn && (
           <Button variant="contained" color="primary" to="/create-post" component={NavLink}>
             Post for adoption
           </Button>
         )}
-      </div>
+      </div> */}
       <PostLoading isLoading={appState.loading} posts={appState.posts} />
     </div>
   );

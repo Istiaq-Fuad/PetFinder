@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 //MaterialUI
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -47,6 +49,8 @@ export default function SignIn() {
   });
 
   const [formData, updateFormData] = useState(initialFormData);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleChange = (e) => {
     updateFormData({
@@ -70,7 +74,20 @@ export default function SignIn() {
           "JWT " + localStorage.getItem("access_token");
         changeLoginState(true);
         history.push("/");
+      })
+      .catch((e) => {
+        console.log(e.response.data.detail);
+        setErrorMessage(e.response.data.detail);
+        setOpen(true);
       });
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   const classes = useStyles();
@@ -112,6 +129,16 @@ export default function SignIn() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
+          <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="error"
+              variant="filled"
+              sx={{ width: "100%" }}
+            >
+              {errorMessage}
+            </Alert>
+          </Snackbar>
           <Button
             type="submit"
             fullWidth

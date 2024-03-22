@@ -48,30 +48,32 @@ function Header() {
               underline="none"
               color="textPrimary"
             >
-              Blog
+              PawFinder
             </Link>
           </Typography>
-          <nav>
-            <Link
-              color="textPrimary"
-              href="#"
-              className={classes.link}
-              component={NavLink}
-              to="/register"
-            >
-              Register
-            </Link>
-          </nav>
-          <Button
-            href="#"
-            color="primary"
-            variant="outlined"
-            className={classes.link}
-            component={NavLink}
-            to="/login"
-          >
-            Login
-          </Button>
+          {!loginState && (
+            <nav>
+              <Link
+                color="textPrimary"
+                href="#"
+                className={classes.link}
+                component={NavLink}
+                to="/register"
+              >
+                Register
+              </Link>
+              <Button
+                href="#"
+                color="primary"
+                variant="outlined"
+                className={classes.link}
+                component={NavLink}
+                to="/login"
+              >
+                Login
+              </Button>
+            </nav>
+          )}
 
           {loginState && (
             <Button

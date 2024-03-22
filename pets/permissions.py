@@ -16,4 +16,4 @@ class PetsWritePermission(BasePermission):
         # if not request.user.is_shelter:
         #     return False
 
-        return request.user == obj.user or request.user.is_superuser
+        return request.user.is_staff

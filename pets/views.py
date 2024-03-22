@@ -2,7 +2,7 @@ from rest_framework import generics
 from .models import Pet
 from .serializers import PetSerializer
 from .permissions import PetsWritePermission
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.views import APIView
 from applications.serializers import ApplicationSerializer
 from applications.models import Application
@@ -14,7 +14,8 @@ from rest_framework import status
 
 
 class PetListCreate(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    # permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (PetsWritePermission,)
     queryset = Pet.objects.all()
     serializer_class = PetSerializer
 
@@ -23,26 +24,25 @@ class PetListCreate(generics.ListCreateAPIView):
 
 
 class PetDetailView(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [PetsWritePermission]
+    permission_classes = (PetsWritePermission,)
     queryset = Pet.objects.all()
     serializer_class = PetSerializer
 
 
-class PetDetailApplicationView(APIView):
-    serializer_class = ApplicationSerializer
+# class PetDetailApplicationView(APIView):
+#     serializer_class = ApplicationSerializer
+#     permission_classes = (IsAdminUser,)
 
-    def get(self, request, pk, format=None):
-        try:
-            pet = Pet.objects.get(id=pk)
-            if pet.user == request.user:
-                applications = Application.objects.filter(pet_id=pk)
-                serializer = ApplicationSerializer(applications, many=True)
-                return Response(serializer.data)
-            return Response(
-                {"message": "not allowed"}, status=status.HTTP_403_FORBIDDEN
-            )
+#     def get(self, request, pk, format=None):
+#         try:
+#             pet = Pet.objects.get(id=pk)
+#             if pet.user == request.user:
+#                 applications = Application.objects.filter(pet_id=pk)
+#                 serializer = ApplicationSerializer(applications, many=True)
+#                 return Response(serializer.data)
+#             return Response(
+#                 {"message": "not allowed"}, status=status.HTTP_403_FORBIDDEN
+#             )
 
-        except:
-            raise NotFound
-
-    
+#         except:
+#             raise NotFound

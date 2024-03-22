@@ -12,7 +12,6 @@ class Pet(models.Model):
     age = models.IntegerField()
     SEX_CHOICES = [("M", "Male"), ("F", "Female")]
     gender = models.CharField(max_length=1, choices=SEX_CHOICES, blank=True)
-    # gender = models.CharField(max_length=6)
     image = models.URLField(blank=False)
     published = models.DateTimeField(default=timezone.now)
     size = models.CharField(max_length=10)
@@ -25,10 +24,3 @@ class Pet(models.Model):
 
     def __str__(self):
         return self.name
-
-
-# class Photo(models.Model):
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-#     pet = models.ForeignKey(Pet, related_name="photos", on_delete=models.CASCADE)
-#     photo_url = models.URLField()
-#     is_primary = models.BooleanField(default=False)
