@@ -54,7 +54,7 @@ const Posts = (props) => {
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image="https://source.unsplash.com/random"
+                      image={post.image}
                       title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
@@ -68,7 +68,7 @@ const Posts = (props) => {
                       </Typography>
                       <div className={classes.postText}>
                         <Typography color="textSecondary">
-                          {post.description.substr(0, 60)}...
+                          {post.description.substr(0, 30)}...
                         </Typography>
                       </div>
                     </CardContent>

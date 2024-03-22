@@ -9,6 +9,7 @@ import Register from "./components/register";
 import Login from "./components/login";
 import Logout from "./components/logout";
 import singlePost from "./components/singlePost";
+import CreatePost from "./components/createPost";
 
 const routing = (
   <Router>
@@ -19,9 +20,9 @@ const routing = (
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
-        <Route path="/:petID" component={singlePost} />
+        <Route path="/create-post" component={CreatePost} />
+        <Route path="/:petId" component={singlePost} />
       </Switch>
-      {/* <Footer /> */}
     </React.StrictMode>
   </Router>
 );

@@ -21,7 +21,7 @@ class ApplicationListCreate(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = ApplicationSerializer(data=request.data)
+        serializer = ApplicationSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save(user=request.user)
             return Response(

@@ -14,8 +14,9 @@ class ApplicationSerializer(serializers.ModelSerializer):
         read_only_fields = ["user", "status"]
 
     def validate(self, data):
+        user = self.context["request"].user
         validated_data = super(ApplicationSerializer, self).validate(data)
-        if Application.objects.filter(**validated_data).exists():
+        if Application.objects.filter(**validated_data, user=user).exists():
             raise serializers.ValidationError("this application already exists")
         return data
 

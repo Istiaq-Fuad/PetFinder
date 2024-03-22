@@ -24,6 +24,14 @@
   color: white;
 }
 
+.adoption-button {
+  margin-bottom: 1rem;
+}
+
+create-post {
+  width: 80%;
+}
+
 .header {
   margin-bottom: 1.5rem;
 }
