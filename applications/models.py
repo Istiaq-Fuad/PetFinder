@@ -14,4 +14,6 @@ class Application(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     pet = models.ForeignKey(Pet, on_delete=models.CASCADE)
     status = models.CharField(max_length=8, choices=STATUS_CHOICES, default="PENDING")
+    pet_experience = models.TextField()
+    house_condition = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

@@ -10,6 +10,8 @@ class ApplicationSerializer(serializers.ModelSerializer):
             "pet",
             "user",
             "status",
+            "pet_experience",
+            "house_condition",
         ]
         read_only_fields = ["user", "status"]
 
@@ -29,5 +31,7 @@ class ApplicationPatchSerializer(serializers.ModelSerializer):
             "pet",
             "user",
             "status",
+            "pet_experience",
+            "house_condition",
         ]
         read_only_fields = ["id", "user", "pet"]
