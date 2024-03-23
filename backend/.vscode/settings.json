@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/f335b5c5-70cc-4419-b468-c50c5bef77c2/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/petfinder",
+  "appService.deploySubpath": "."
+}
