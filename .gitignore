@@ -2,6 +2,7 @@
 __pycache__
 **/env/
 .vscode/
+/staticfiles
 
 # dependencies
 **/node_modules/
